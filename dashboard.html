@@ -1,0 +1,212 @@
+<!--SCRIPT FILE IS BELOW IN  THIS SAME FILE-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://kit.fontawesome.com/13e3502246.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+    <nav>
+        <p class="logo">SMART-BIN</p>
+        <div class="sides">
+            <i class="fa-solid fa-bars" style="color: white;"></i>
+            
+            <div class="navigation">
+                <a class="button" href="">
+                    
+                    <div id="logout" class="logout" onclick="on_logout()">
+                        <span class="material-symbols-outlined">
+                        logout
+                        </span><p>LOGOUT</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="status" id="status">
+        <header>
+            <i class="fa-solid fa-lightbulb" style="color: #ffffff;"></i>
+            <p>MACHINE STATUS - </p>
+            <p id="mac_status">OFF</p>
+        </header>
+        <div class="indicator">
+            <div class="glow"></div>
+            <p id="indicator_val">OFF</p>
+        </div>
+        
+        <div class="light">
+            <div class="wire"></div>
+            <div class="bulb">
+                <span></span>
+                <span></span>
+            </div>
+            <div class="switch">
+                <div class="btn" id="switch" onclick="switch_clicked()"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="monitor">
+        <header>
+            <i class="fa-solid fa-lightbulb" style="color: #ffffff;"></i>
+            <p>MONITORING - </p>
+            <p id="mac_status_monitor">IDLE</p>
+        </header>
+        <div class="container">
+            <div id="solid" class="card">
+                <div class="percent" style="--clr:#04fc43; --num:0">
+                    <div class="dot"></div>
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="number">
+                        <h2 id="solid_val"><b>0</b><span>%</span></h2>
+                        <p>SOLID</p>
+                    </div>
+                </div>
+            </div>
+            <div id="magnetic" class="card">
+                <div class="percent" style="--clr:#FEE800; --num:0">
+                    <div class="dot"></div>
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="number">
+                        <h2 id="magnetic_val"><b>0</b><span>%</span></h2>
+                        <p>MAGNETIC</p>
+                    </div>
+                </div>
+            </div>
+            <div id="light_weight" class="card">
+                <div class="percent" style="--clr:#FF00BE; --num:0">
+                    <div class="dot"></div>
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="number">
+                        <h2 id="light_val"><b>0</b><span>%</span></h2>
+                        <p style="font-size: 0.8rem; margin-left: 8px;">LIGHT WEIGHT</p>
+                    </div>
+                </div>
+            </div>
+            <div id="sanitary" class="card">
+                <div class="percent" style="--clr:#06CCFF; --num:0">
+                    <div class="dot"></div>
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="number">
+                        <h2 id="sanitary_val"><b>0</b><span>%</span></h2>
+                        <p>SANITARY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <script>
+        var root = document.querySelector(':root');
+        let btn = document.querySelector('#switch');
+        let body = document.getElementById('status');
+        let indicator_glow = document.querySelector('.glow');
+        let indicator_val = document.getElementById('indicator_val');
+        let head = document.querySelector('.status header');
+        let head_m = document.querySelector('.monitor header');
+        let mac_status = document.getElementById('mac_status');
+        let mac_status_monitor = document.getElementById('mac_status_monitor');
+        let status = 0;
+        function switch_clicked(){
+            if (status == 0) {
+                body.style.background = "radial-gradient(#555, #111)";
+                body.style.backgroundPositionY = "42px";
+                mac_status.innerHTML = "ON";
+                head.style.background = "#f1c40f";
+                head_m.style.background = "#f1c40f";
+                mac_status_monitor.innerHTML = "MACHINE ON";
+                root.style.setProperty('--gray', '#f1c40f');
+                indicator_glow.style.background = "#0FFF50";
+                indicator_val.innerHTML = "ON";
+                indicator_glow.style.textShadow = "0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa";
+                status = 1;
+            }
+            else {
+                body.style.background = "#222";
+                body.style.backgroundPositionY = "0";
+                mac_status.innerHTML = "OFF";
+                head.style.background = "#777";
+                head_m.style.background = "#777";
+                mac_status_monitor.innerHTML = "IDLE";
+                indicator_glow.style.background = "#FF5733";
+                indicator_val.innerHTML = "OFF";
+                indicator_glow.style.textShadow = "0 0 10px pink, 0 0 20px orangered, 0 0 40px red, 0 0 80px magenta";
+                root.style.setProperty('--gray', '#444');
+                status = 0;
+            }
+            body.classList.toggle('status_on');
+        }
+
+
+
+
+
+
+        // ON LOGOUT CLICK
+        function on_logout() {
+            console.log("LOGOUT BTN CLICKED");
+        }
+
+        // ASSIGN THE VALUE OF PERCENT OF PROGRESS
+        let solid_percent = document.querySelector('#solid .percent');
+        let solid_val = document.querySelector('#solid_val b');
+
+        let sanitary_percent = document.querySelector('#sanitary .percent');
+        let sanitary_val = document.querySelector('#sanitary_val b');
+
+        let light_weight_percent = document.querySelector('#light_weight .percent');
+        let light_weight_val = document.querySelector('#light_val b');
+
+        let magnetic_percent = document.querySelector('#magnetic .percent');
+        let magnetic_val = document.querySelector('#magnetic_val b');
+
+        // ANNA, UPDATE THE VALUES IN THIS VARIABLE --------------------
+        var solid_value = '85';
+        var magnetic_value = '38';
+        var light_value = '0';
+        var sanitary_value = '21';
+
+
+        // Here i am updating it automatically --
+        solid_percent.style.setProperty('--num', solid_value); 
+        solid_val.innerHTML = solid_value;
+        magnetic_percent.style.setProperty('--num', magnetic_value); 
+        magnetic_val.innerHTML = magnetic_value;
+        light_weight_percent.style.setProperty('--num', light_value); 
+        light_weight_val.innerHTML = light_value;
+        sanitary_percent.style.setProperty('--num', sanitary_value); 
+        sanitary_val.innerHTML = sanitary_value;
+    </script>
+</body>
+</html>
